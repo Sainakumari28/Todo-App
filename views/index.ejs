@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo</title>
+    <link rel="stylesheet" href="/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="flash-message">
+  <% if(success && success.length > 0) { %>
+    <div class="alert alert-success" >
+        <%= success %>
+    </div>
+  <% } %>
+
+   <% if(error && error.length > 0) { %>
+    <div class="alert alert-danger">
+        <%= error %>
+    </div>
+  <% } %>
+  </div>
+
+    <div class="todo-container">
+    <h1 >Todo App</h1>
+
+     
+    <!-- Add new button -->
+     <button class="btn-add" onclick="showForm()">Add new task</button>
+    <form id="taskForm" method="POST" action="/todo" style="display:none;">
+        <input type="text" name="task" placeholder="Enter Your Task" class="add-new"/>
+        <button class="add-task">  Add Task </button>
+    </form>
+     <br /> 
+
+     <div class="task-list">
+    <% todos.forEach((todo) => { %> 
+     <div class="task-item">
+
+      <div class="task-left">
+        <!-- Checkbox -->
+         <form method="POST" action="/todo/<%= todo._id %>?_method=PUT" class="checkbox-form">
+
+            <input type="checkbox" name="complete" value="true"
+            onchange="this.form.submit()"
+            <%= todo.complete ? "checked" : "" %>>
+             <input type="hidden" name="complete" value="false" >
+         </form>
+         <p class="task-text"><%= todo.task %></p>
+      </div>
+        
+
+        <div class="action-section">
+        <!-- Edit -->
+    <a href="/todo/<%= todo._id %>/edit">
+     <button class="btn-edit"> Edit </button>
+     </a>
+
+     <!-- Delete -->
+   <form method="POST" action="/todo/<%= todo._id %>?_method=DELETE" class="inline-form">
+   <button class="btn-delete"> Delete </button>
+    </form>
+    </div>  
+ </div> <!--  task-item -->
+
+    <!-- Update -->
+     <% if (editTodo && editTodo._id.equals(todo._id)) { %>
+      <div class="update-box">
+        <form method="POST" action="/todo/<%= todo._id %>?_method=PUT">
+       <input 
+       type="text"
+       name="task"
+       value="<%= editTodo.task %>" />
+       <button class="btn-update"> Update </button>
+       </form>
+       </div>
+        <% } %>
+
+         <% }) %>     <!--loop end-->
+        </div>     <!--task-list-->
+      </div>     <!--todo-container-->
+
+
+      <script>
+    setTimeout(() => {
+        const flashMessage = document.querySelector(".flash-message");
+
+        if (flashMessage) {
+            flashMessage.style.display = "none";
+        }
+    }, 3000);
+   </script>
+
+      <script> function showForm() {
+        document.getElementById("taskForm").style.display = "block"; }</script>
+    </body>
+</html>
