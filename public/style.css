@@ -1,4 +1,4 @@
-@import url('https://googleapis.com');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 * {
     margin: 0;
@@ -117,10 +117,12 @@ button {
 .update-box form {
     display: flex;
     gap: 8px;
+    width: 100%;
 }
 
 .update-box input {
     flex: 1;
+    min-width: 0;
     padding: 6px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -129,6 +131,7 @@ button {
 .btn-update {
     background: #2ecc71;
     color: white;
+    white-space: nowrap;
 }
 
 .add-new {
