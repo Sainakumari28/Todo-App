@@ -9,33 +9,102 @@
 
 body {
     background: linear-gradient(135deg, #a2c4f7 0%, #556c93 100%);
-     min-height: 100vh;
+    min-height: 100vh;
     display: flex;
+    flex-direction: column; /* Multi-row elements (Welcome + Container ) */ 
     justify-content: center;
     align-items: center;
-    padding: 20px;
+    padding: 40px 20px;
+    gap: 15px; /* container k bich ka gap */
 }
 
+/* Flash / Alter Message */
+.flash-message {
+    position: fixed;
+    top: 20px; /* Safe upper margin*/
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    width: 90%;
+    max-width: 450px;
+}
 
-h1 {
-    color: #333;
-    font-size: 28px;
-    font-weight: 600;
-    margin-bottom: 20px;
+ .alert {
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
     text-align: center;
-    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+ }
+
+
+ /* Welcome & Logout Section */
+  .welcome-section {
+    width: 100%;
+    max-width: 450px;
+    margin-bottom: 50px ; /* Center aligment or niche se gap */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.todo-container {
+ .welcome-section h3 {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+    margin: 0;
+}
+
+  .todo-header form  {
+    display: flex;
+  }
+ 
+  /* Bootstrap .btn-danger Custom Override  */
+  .welcome-section .btn-danger {
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    background-color: #f44a4a;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+ 
+  .welcome-section .btn-danger:hover {
+    background-color: #e05655;
+    transform: translateY(-1.5px);
+  }
+
+  /* Main Todo COntainer */
+
+ .todo-container {
     background: #ffffff ;
     width: 100%;
     max-width: 450px;
     padding: 30px;
     border-radius: 16px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
+ }
 
-.btn-add {
+ h1 {
+    color: #333;
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+ }
+
+  /* Add new Task Button */
+  .btn-add { 
     width: 100%;
     background: #556c93;
     color: white;
@@ -45,15 +114,60 @@ h1 {
     font-size: 15px;
     cursor: pointer;
     margin-bottom: 20px;
-}
+    font-weight: 600;
+    transition: background 0.2s;
+  } 
 
-.task-list {
+  .btn-add:hover {
+    background: #435675;
+  }
+
+  /* Dynamic Add Task Form */
+  #taskForm {
+    display: none; /* Script block hone pe flexibillty bni rhegi*/
+    gap: 8px;
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+ .add-new {
+    flex: 1; /* Give all space of input field */
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    font-size: 14px;
+    transition: border-color 0.2s;
+ }
+
+ .add-new:focus {
+    border-color: #556c93;
+ }
+
+ .add-task {
+    background: #e2e8f0;
+    color: #333;
+    padding: 0 16px;
+    height: 40px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  
+  .add-task:hover {
+    background: #5d7089;
+    color: white;
+  }
+
+  /* Task List & items */
+ .task-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
-}
+ }
 
-/* Every task's line */
  .task-item {
     background: #d3e6f8;
     border: 1px solid #e2e8f0;
@@ -62,38 +176,61 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: transform 0.2s;
+ }
+
+ .task-item:hover {
+    transform: translateY(-1px);
  }
 
  .task-left {
     display: flex;
     align-items: center;
     gap: 12px;
+    flex: 1;
+    min-width: 0; /* Text wrap ko manage karne ke liye */
  }
-
- .task-text {
-    font-size: 15px;
-    color: #333;
- }
-
-
-.action-section {
+  
+ .checkbox-form {
     display: flex;
-    gap: 6px;
     align-items: center;
 }
 
-.inline-form {
-    display: inline;
+.checkbox-form input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
 }
 
+.task-text {
+    font-size: 15px;
+    color: #333;
+    word-break: break-word; /* Bada text hone par line todne ke liye */
+}
+ 
+/* Action Area (Buttons */
+ .action-section {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+ } 
+
+ .inline-form {
+    display: inline;
+ } 
+
 /* Button Design */
-button {
+  button, .action-section a button { 
     padding: 6px 12px;
     border: none;
     border-radius: 6px;
     font-size: 13px;
     cursor: pointer;
     font-weight: 500;
+} 
+
+.button:hover {
+    opacity: 0.9;
 }
 
 .btn-edit {
@@ -109,9 +246,10 @@ button {
 /* Update Box */
 .update-box {
     background: #f1f5f9;
-    padding: 10px;
+    padding: 12px;
     border-radius: 8px;
     margin-top: -6px;
+    border: 1px solid #e2e8f0;
 }
 
 .update-box form {
@@ -123,9 +261,15 @@ button {
 .update-box input {
     flex: 1;
     min-width: 0;
-    padding: 6px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    outline: none;
+}
+
+.update-box input:focus {
+    border-color: #2ecc71;
 }
 
 .btn-update {
@@ -134,19 +278,175 @@ button {
     white-space: nowrap;
 }
 
-.add-new {
-    width: 15rem;
-    height: 2.5rem;
+/* ==========================================
+   6. AUTHENTICATION BOXES (Login / Signup) - UPDATED
+   ========================================== */
+.signup-box, .login-box {
+    background: white;
+    width: 100%;
+    max-width: 450px; /* Todo container ke barabar size */
+    margin: 40px auto;
+    padding: 35px 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
-.add-task {
-    background: lightblue;
+.signup-box h3, .login-box h3 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;
+    font-size: 26px;
+    font-weight: 600;
 }
 
-.flash-message {
-    position: fixed;
-    top: 2px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
+/* Form ke har ek input row (Email / Password block) ke liye */
+.signup-box form div, .login-box form div {
+    display: flex;
+    flex-direction: column; /* Label upar aur input box niche lane ke liye */
+    align-items: flex-start;
+    gap: 6px;               /* Label aur input ke beech ka gap */
+    margin-bottom: 18px;    /* agle option ke beech ka gap */
+    width: 100%;
 }
+
+/* Labels ki styling */
+.signup-box label, .login-box label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+/* Input boxes ko modern aur bada karne ke liye */
+.signup-box input, .login-box input {
+    width: 100%;
+    height: 42px;
+    padding: 0 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+/* Input par click karne ka reaction */
+.signup-box input:focus, .login-box input:focus {
+    border-color: #556c93;
+    box-shadow: 0 0 0 3px rgba(85, 108, 147, 0.1);
+}
+
+/* Submit Button ko perfect width aur design dene ke liye */
+.signup-box button[type="submit"], .login-box button[type="submit"] {
+    width: 100%;       /* Mobile aur laptop dono par full width modern look */
+    height: 42px;
+    background: #556c93; /* Todo App ke theme se match karta color */
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    transition: background 0.2s;
+}
+
+.signup-box button[type="submit"]:hover, .login-box button[type="submit"]:hover {
+    background: #435675;
+}
+
+/* Bottom Sign Up / Login link text decoration ke liye */
+.signup-box p, .login-box p {
+    text-align: center;
+    font-size: 14px;
+    color: #64748b;
+}
+
+.signup-box p a, .login-box p a {
+    color: #556c93;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-box p a:hover, .login-box p a:hover {
+    text-decoration: underline;
+}
+
+
+/* Laptop vs Mobile Responsive Media Queries */
+
+ /* Specially for Mobile Devices */
+  @media (max-width: 480px) {
+    body {
+        padding: 12px;
+        gap: 12px;
+    }
+
+    /* Welcome block vertical stack ho jyega */
+    .welcome-section {
+            flex-direction: column;
+            gap: 10px;
+            text-align: center;
+            padding: 15px;
+        }
+
+     .welcome-section h3 {
+        font-size: 15px;
+     }   
+
+     .todo-header, .todo-header form, .welcome-section .btn-danger {
+        width: 100%;
+     } 
+
+     .welcome-section .btn-danger {
+        padding: 8px;
+        font-size: 14px;
+     }
+
+     /* Main box adjustment */
+     .todo-container {
+        padding: 20px 15px;
+     }
+
+     /* Input and Add form Layout fixes */
+     #taskForm {
+        flex-direction: column;
+        gap: 8px;
+     }
+
+     .add-new {
+        width: 100%;
+     }
+
+     .add-task {
+        width: 100%;
+     }
+
+     /* Item Structure on mobile  */
+     .task-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+     }
+
+     .action-section {
+        width: 100%;
+        justify-content: flex-end;
+        border-top: 1px solid rgba(0, 0, 0, 0.5);
+        padding-top: 8px;
+     }
+
+     .action-section a, .inline-form {
+        flex: 1;
+     }
+
+     /* Update dynamic block layout */
+     .update-box form {
+        flex-direction: column;
+     }
+
+     .btn-update {
+        width: 100%;
+        padding: 8px;
+     }
+  }
+
+
+ 

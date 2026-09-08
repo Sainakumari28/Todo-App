@@ -1,0 +1,51 @@
+<% layout("/layouts/head") %> 
+
+    <form method="post" action="/signup" class="needs-validation" novalidate>
+       <div class="signup-box">
+    <h3>SignUp</h3>
+      <% if (error && error.length) { %>
+      <div class="alert alert-danger">
+      <%= error %>
+   </div>
+ <% } %>
+    <div>
+      <label for="email" class="form-label">Email</label>
+         <input type="text"
+          name="email" 
+          placeholder="Enter your email"
+          class="form-control"
+          required/>
+         <div class="invalid-feedback">Please Enter Your Email</div>
+      </div>
+     <br /> 
+
+   <div>
+      <label for="username" class="form-label">Username</label>
+      <input type="text" 
+       name="username"
+       placeholder="Enter your Username" 
+       class="form-control"
+       required/>
+       <div class="invalid-feedback">Please Enter Your Username</div>
+   </div>
+      <br /> 
+
+   <div>   
+       <label for="password" class="form-label">Password</label>
+        <input type="password"
+         name="password" 
+         placeholder="Enter your password"
+         class="form-control"
+         required/>
+        <div class="invalid-feedback">Please Enter Your Password</div>
+   </div>
+    <br>
+     <button class="btn btn-primary">Submit</button>
+   
+     <br />
+     <p> 
+        Already have an account?
+        <a href="/login">Login</a>
+     </p>
+     </div> 
+    </form>
