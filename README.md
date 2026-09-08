@@ -4,6 +4,8 @@ A simple and user-friendly Todo App built using Node.js, Express.js, MongoDb, EJ
 
 ## Features
 
+- Signup
+- Login
 - Add new tasks
 - Edit tasks
 - Delete tasks
