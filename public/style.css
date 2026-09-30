@@ -185,12 +185,21 @@ body {
 
  .task-left {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 12px;
     flex: 1;
     min-width: 0; /* Text wrap ko manage karne ke liye */
  }
   
+ .task-text {
+    font-size: 15px;
+    color: #333;
+    word-break: break-word; /* Bada text hone par line todne ke liye */
+    margin: 0;
+    line-height: 18px;
+    /* text-align: center; */
+}
+
  .checkbox-form {
     display: flex;
     align-items: center;
@@ -202,12 +211,6 @@ body {
     cursor: pointer;
 }
 
-.task-text {
-    font-size: 15px;
-    color: #333;
-    word-break: break-word; /* Bada text hone par line todne ke liye */
-}
- 
 /* Action Area (Buttons */
  .action-section {
     display: flex;
@@ -236,11 +239,19 @@ body {
 .btn-edit {
     background: #ffeaa7;
     color: #b57c00;
+    width: 70px;
+    height: 30px;
+    padding: 0;
+    border-radius: 6px;
 }
 
 .btn-delete {
     background: #ff7675;
     color: white;
+    width: 70px;
+    height: 30px;
+    padding: 0;
+    border-radius: 6px;
 }
 
 /* Update Box */
